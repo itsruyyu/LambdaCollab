@@ -51,12 +51,10 @@ def delete_todo(todo_id):
     removed_todo = todos.pop(todo_id)
     return jsonify(removed_todo), 200
 
-# Lambda handler untuk deploy di AWS Lambda
 def lambda_handler(event, context):
     from werkzeug.middleware.dispatcher import DispatcherMiddleware
     from werkzeug.serving import run_simple
 
-    # Menghubungkan WSGI app untuk digunakan di Lambda
     application = DispatcherMiddleware(app)
 
     return run_simple('0.0.0.0', 5000, application)
