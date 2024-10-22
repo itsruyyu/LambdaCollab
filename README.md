@@ -19,12 +19,9 @@ Ini adalah aplikasi CRUD sederhana untuk mengelola daftar tugas (*to-do list*) m
 src/
 │   app.py                # Kode utama aplikasi
 │   requirements.txt      # Daftar dependensi Python
-└───tests/                # Berisi pengujian API
-    └── test_api.py
 config/
-│   environment.env       # Variabel lingkungan
-documentation/
-│   api-documentation.md  # Dokumentasi API
+│   aws_config.json       # Konfigurasi akun aws
+
 README.md                 # Dokumentasi proyek ini
 ```
 
@@ -46,29 +43,44 @@ README.md                 # Dokumentasi proyek ini
    Gunakan Postman atau aplikasi serupa untuk melakukan uji coba.
 
 ## Contoh Request & Respons
-### 1. **POST /todos**
+### 1. **POST https://u6l4g4f004.execute-api.us-east-1.amazonaws.com/todos**
 **Request Body:**
 ```json
 {
-    "task": "Belajar Lambda"
+  "task": "Uji coba"
 }
 ```
 **Response:**
 ```json
 {
-    "id": 0,
-    "task": "Belajar Lambda",
+    "id": "0d14fa99-8351-44fe-9b14-88d6b96f6eac",
+    "task": "Uji coba",
     "status": "pending"
 }
 ```
 
-### 2. **GET /todos**
+### 2. **GET https://u6l4g4f004.execute-api.us-east-1.amazonaws.com/todos**
 **Response:**
 ```json
 [
     {
-        "id": 0,
-        "task": "Belajar Lambda",
+        "id": "c3dc9a21-ea4e-48a8-aa30-d8df03e1b63d",
+        "task": "Belajar AWS",
+        "status": "pending"
+    },
+    {
+        "id": "0d14fa99-8351-44fe-9b14-88d6b96f6eac",
+        "task": "Uji coba",
+        "status": "pending"
+    },
+    {
+        "id": "31d0048a-383e-4c42-8a5a-0cf73c151aad",
+        "task": "Makan siang",
+        "status": "pending"
+    },
+    {
+        "id": "a0d2c81a-82b5-4dfc-82b3-f55e6863786a",
+        "task": "Belajar baik",
         "status": "pending"
     }
 ]
@@ -91,31 +103,29 @@ README.md                 # Dokumentasi proyek ini
 }
 ```
 
-### 4. **DELETE /todos/0**
+### 4. **DELETE (https://u6l4g4f004.execute-api.us-east-1.amazonaws.com/todos/31d0048a-383e-4c42-8a5a-0cf73c151aad)**
 **Response:**
 ```json
 {
-    "id": 0,
-    "task": "Belajar Lambda dan Flask",
-    "status": "completed"
+    "message": "Deleted todo 31d0048a-383e-4c42-8a5a-0cf73c151aad\n"
 }
 ```
 
 ## Uji API dengan Postman
 1. Buka Postman dan buat tab baru.
-2. Masukkan URL API: `https://<api-gateway-url>/todos`.
+2. Masukkan URL API: `https://u6l4g4f004.execute-api.us-east-1.amazonaws.com/todos`.
 3. Pilih metode HTTP yang sesuai (GET, POST, PUT, DELETE).
 4. Klik **Send** dan lihat hasilnya.
 
 ## Kontributor
 - **itsruyyu**: Maintainer & GitHub Manager
 - **NoverainSenge**: Backend Developer 1
-- **Revanzza**: DevOps & Deployment Manager
+- **Revanzza**: Backend Developer 2
+- **Fathansu**: DevOps & Deployment Manager
 - **imanuel010604**: Dokumentasi & QA
-- **bangjur**: Evaluator & Feedback Coordinator
+- **bangjur**: Evaluator & Feedback 
 
-## Lisensi
-Proyek ini dilisensikan di bawah lisensi MIT.
+
 
 
  
