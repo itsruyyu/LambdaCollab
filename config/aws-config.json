@@ -1,1 +1,6 @@
+{
+    "aws_region": "ap-southeast-1",            
+    "lambda_function_name": "http-crud-tutorial-function", 
+    "api_gateway_url": "https://5dsuf4xflh.execute-api.us-east-1.amazonaws.com"
+}
 
