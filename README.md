@@ -86,20 +86,18 @@ README.md                 # Dokumentasi proyek ini
 ]
 ```
 
-### 3. **PUT /todos/0**
+### 3. **PUT https://u6l4g4f004.execute-api.us-east-1.amazonaws.com/todos/0872172a-3976-4d1e-8ae7-ec45625c1713**
 **Request Body:**
 ```json
 {
-    "task": "Belajar Lambda dan Flask",
+    "task": "Test lagi",
     "status": "completed"
 }
 ```
 **Response:**
 ```json
 {
-    "id": 0,
-    "task": "Belajar Lambda dan Flask",
-    "status": "completed"
+    "message": "Updated todo 0872172a-3976-4d1e-8ae7-ec45625c1713"
 }
 ```
 
