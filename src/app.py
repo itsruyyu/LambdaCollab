@@ -7,7 +7,7 @@ todos = []
 @app.route('/todos', methods=['POST'])
 def add_todo():
     """
-    Endpoint untuk menambahkan todo baru.
+    Endpoint untuk menambahkan to-do baru..
     """
     data = request.get_json()
     if not data.get('task'):
@@ -24,7 +24,7 @@ def add_todo():
 @app.route('/todos/<int:todo_id>', methods=['PUT'])
 def update_todo(todo_id):
     """
-    Endpoint untuk memperbarui todo berdasarkan ID.
+    Endpoint untuk memperbarui to-do berdasarkan ID.
     """
     if todo_id >= len(todos):
         return jsonify({"error": "Todo not found"}), 404
@@ -36,7 +36,7 @@ def update_todo(todo_id):
 @app.route('/todos', methods=['GET'])
 def get_todos():
     """
-    Endpoint untuk mendapatkan semua todo.
+    Endpoint untuk mendapatkan semua to-do.
     """
     return jsonify(todos), 200
 
