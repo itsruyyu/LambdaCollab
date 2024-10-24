@@ -45,7 +45,7 @@ def lambda_handler(event, context):
 
         # Menangani GET /todos/{id} untuk mendapatkan todo berdasarkan ID
         elif event['routeKey'] == "GET /todos/{id}":
-            todo_id = event['pathParameters']['id']
+            todo_id = event['pathParameters']['id'].strip()  # Menghapus karakter newline jika ada
             response = table.get_item(Key={'id': todo_id})
             if 'Item' not in response:
                 statusCode = 404
@@ -55,23 +55,27 @@ def lambda_handler(event, context):
 
         # Menangani PUT /todos/{id} untuk memperbarui todo berdasarkan ID
         elif event['routeKey'] == "PUT /todos/{id}":
-            todo_id = event['pathParameters']['id']
+            todo_id = event['pathParameters']['id'].strip()  # Menghapus karakter newline jika ada
             requestJSON = json.loads(event['body'])
-            update_expression = "set task = :task, status = :status"
+            update_expression = "SET task = :task, #s = :status"
             expression_values = {
                 ':task': requestJSON.get('task', 'No Task'),
                 ':status': requestJSON.get('status', 'pending')
             }
+            expression_attribute_names = {
+                '#s': 'status'  # Alias untuk status
+            }
             table.update_item(
                 Key={'id': todo_id},
                 UpdateExpression=update_expression,
-                ExpressionAttributeValues=expression_values
+                ExpressionAttributeValues=expression_values,
+                ExpressionAttributeNames=expression_attribute_names
             )
             body = {'message': 'Updated todo ' + todo_id}
 
         # Menangani DELETE /todos/{id} untuk menghapus todo berdasarkan ID
         elif event['routeKey'] == "DELETE /todos/{id}":
-            todo_id = event['pathParameters']['id']
+            todo_id = event['pathParameters']['id'].strip()  # Menghapus karakter newline jika ada
             table.delete_item(Key={'id': todo_id})
             body = {'message': 'Deleted todo ' + todo_id}
 
@@ -82,6 +86,9 @@ def lambda_handler(event, context):
     except KeyError:
         statusCode = 400
         body = {'error': 'Invalid input'}
+    except Exception as e:
+        statusCode = 500
+        body = {'error': str(e)}
 
     body = json.dumps(body)
     return {
